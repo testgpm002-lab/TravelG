@@ -51,87 +51,6 @@ loadDoc()
   // // 4.append to page
   // $(".class-container").html(compiledcardTemplate(data[0].CityName));
 // });
-var data2 = [
-  "car":
-    {
-        "id": 1,
-        "CityName": "Mumbai",
-        "Location": "https://www.google.com/maps/place/Mumbai,+Maharash",
-        "Rating": 4.0
-    },
-    {
-        "id": 3,
-        "CityName": "Delhi",
-        "Location": "28.6600\t77.2300",
-        "Rating": 3.0
-    },
-    {
-        "id": 4,
-        "CityName": "Kolkāta",
-        "Location": "22.5411\t88.3378",
-        "Rating": 4.0
-    },
-    {
-        "id": 5,
-        "CityName": "Chennai",
-        "Location": "13.0825\t80.2750",
-        "Rating": 4.0
-    },
-    {
-        "id": 6,
-        "CityName": "Lucknow",
-        "Location": "26.8470\t80.9470",
-        "Rating": 3.0
-    },
-    {
-        "id": 7,
-        "CityName": "Jammu",
-        "Location": "32.7333\t74.8500",
-        "Rating": 4.4
-    },
-    {
-        "id": 8,
-        "CityName": "Indore",
-        "Location": "22.7206\t75.8472",
-        "Rating": 5.0
-    },
-    {
-        "id": 9,
-        "CityName": "TESTING",
-        "Location": "26.8880\t80.6666",
-        "Rating": 5.0
-    },
-    {
-        "id": 10,
-        "CityName": "TESTING",
-        "Location": "26.8880\t80.6666",
-        "Rating": 5.0
-    },
-    {
-        "id": 11,
-        "CityName": "TESTING",
-        "Location": "26.8880\t80.6666",
-        "Rating": 5.0
-    },
-    {
-        "id": 12,
-        "CityName": "TESTING",
-        "Location": "26.8880\t80.6666",
-        "Rating": 5.0
-    },
-    {
-        "id": 13,
-        "CityName": "TESTING12_Update",
-        "Location": "26.8880\t80.6666",
-        "Rating": 5.0
-    },
-    {
-        "id": 14,
-        "CityName": "TESTING 9",
-        "Location": "26.8880\t80.6666",
-        "Rating": 5.0
-    }
-]
 
 
 $.holdReady(true);
@@ -141,16 +60,148 @@ $.getJSON("http://127.0.0.1:8000/CityList/", function(data) {
     $.holdReady(false);
 });
 
+
+
 $(document).ready(function(){
-    console.log(remoteJSONContent);
+    var ma=remoteJSONContent    
+    var test=({'car':ma})
+    console.log(test)
+
     var cardTemplate = $("#Template").html();
     // 2.Compile the string into a function
     var compiledcardTemplate = Handlebars.compile(cardTemplate);
     // 4.append to page
-    $(".cards").html(compiledcardTemplate(data2);
+    $(".cards").html(compiledcardTemplate(test));
 });
 
 
+
+data1 = [
+  {
+      "id": 1,
+      "CityName": "Mumbai",
+      "Location": "https://www.google.com/maps/place/Mumbai,+Maharash",
+      "Rating": 4.0
+  },
+  {
+      "id": 3,
+      "CityName": "Delhi",
+      "Location": "28.6600\t77.2300",
+      "Rating": 3.0
+  },
+  {
+      "id": 4,
+      "CityName": "Kolkāta",
+      "Location": "22.5411\t88.3378",
+      "Rating": 4.0
+  },
+  {
+      "id": 5,
+      "CityName": "Chennai",
+      "Location": "13.0825\t80.2750",
+      "Rating": 4.0
+  },
+  {
+      "id": 6,
+      "CityName": "Lucknow",
+      "Location": "26.8470\t80.9470",
+      "Rating": 3.0
+  },
+  {
+      "id": 7,
+      "CityName": "Jammu",
+      "Location": "32.7333\t74.8500",
+      "Rating": 4.4
+  },
+  {
+      "id": 8,
+      "CityName": "Indore",
+      "Location": "22.7206\t75.8472",
+      "Rating": 5.0
+  },
+  {
+      "id": 9,
+      "CityName": "TESTING",
+      "Location": "26.8880\t80.6666",
+      "Rating": 5.0
+  },
+  {
+      "id": 10,
+      "CityName": "TESTING",
+      "Location": "26.8880\t80.6666",
+      "Rating": 5.0
+  },
+  {
+      "id": 11,
+      "CityName": "TESTING",
+      "Location": "26.8880\t80.6666",
+      "Rating": 5.0
+  },
+  {
+      "id": 12,
+      "CityName": "TESTING",
+      "Location": "26.8880\t80.6666",
+      "Rating": 5.0
+  },
+  {
+      "id": 13,
+      "CityName": "TESTING12_Update",
+      "Location": "26.8880\t80.6666",
+      "Rating": 5.0
+  },
+  {
+      "id": 14,
+      "CityName": "TESTING 9",
+      "Location": "26.8880\t80.6666",
+      "Rating": 5.0
+  },
+  {
+      "id": 15,
+      "CityName": "austri",
+      "Location": "22.7206\t75.8472",
+      "Rating": 8.0
+  }
+]
+
+//SEARCH FUNCTIONALITY
+
+$('#search').on('keyup', function(){
+  var value = $(this).val()
+  console.log('value:', value)
+  var data = search(value, data1)
+  createcards(data)
+})
+
+createcards(data1)
+
+
+function search(value, data){
+  var filterdata = []
+  for (var i = 0; i < data.length; i++){
+    value = value.toLowerCase()
+    var name = data[i].CityName.toLowerCase()
+    
+    if (name.includes(value)){
+      filterdata.push(data[i])
+
+    }
+  }
+  return filterdata
+}
+
+
+
+function createcards(data){
+  var card = document.getElementById('wrap')
+  card.innerHTML = ''
+  for(var i = 0; i < data.length; i++){
+    var row = `<div>
+                  <h3>${data[i].CityName}</h3>
+                  <p>${data[i].Location}</p>
+              </div>`
+    card.innerHTML += row
+  }
+}
 
 
 
@@ -163,7 +214,7 @@ $(document).ready(function(){
 //     method: 'GET',
 //     success:function(data){
 //         printData(data);
-//         console.log(data)
+//         console.log("this sis ajax",data)
 //     },
 //     error: function(){
 //         alert('error');

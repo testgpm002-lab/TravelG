@@ -13,7 +13,7 @@ body{
 }
 
 header{
-    position: fixed;
+    position: relative;
     top: 0;
     width: 100%;
     display: flex;
@@ -22,7 +22,7 @@ header{
     min-height: 8vh;
     background-color: #51378f;
     font-family: "Poppins", sans-serif;
-    overflow: hidden;
+    
 }
 
 .cards{
@@ -96,6 +96,10 @@ img{
 
 
 /*NAVIGATION*/
+
+
+
+
 * {
     margin: 0;
     padding: 0;
@@ -103,16 +107,17 @@ img{
 }
 
 nav {
-    position: fixed;
+    position: absolute;
     top: 0;
     width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
     min-height: 8vh;
-    background-color: #51378f;
+    background-color: #0f0f0f;
     font-family: "Poppins", sans-serif;
     overflow: hidden;
+    z-index: 1;
 }
 
 .logo {
@@ -121,6 +126,28 @@ nav {
     letter-spacing: 5px;
     font-size: 20px;
 }
+
+.d-flex .form-control{
+    position: relative;
+    height: 29px;
+    width: 300px;
+    border-radius: 5px;
+    padding: 0 20px 0 20px;
+    font-size: 14px;
+}
+
+.d-flex .btn{
+    height: 25px;
+    width: 100px;
+    line-height: 22px;
+    top: 0;
+    right: 0;
+    text-align: center;
+    font-size: 14px;
+    color:#51378f;
+    font-weight: bold;
+}
+
 
 .nav-links {
     display: flex;
